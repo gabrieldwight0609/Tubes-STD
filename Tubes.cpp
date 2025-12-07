@@ -1,10 +1,5 @@
 #include "Tubes.h"
 
-
-// ==========================================
-// IMPLEMENTASI MLL (LIBRARY)
-// ==========================================
-
 void createLibrary(ListLibrary &L) {
     L.first = nullptr;
 }
@@ -436,3 +431,4 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         }
     }
 }
+
