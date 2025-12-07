@@ -17,7 +17,6 @@ int main() {
     int role = 1;     
     string inputTemp;  
 
-    // 5. Loop Menu Utama
     while (role != 0) {
         cout << "\n=== SPOTIPI MUSIC PLAYER ===" << endl;
         cout << "Masuk sebagai:" << endl;
@@ -43,3 +42,4 @@ int main() {
 
     return 0;
 }
+
