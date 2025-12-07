@@ -4,7 +4,6 @@ void createLibrary(ListLibrary &L) {
     L.first = nullptr;
 }
 
-// [BARU] Implementasi isEmpty untuk MLL
 bool isEmptyLibrary(ListLibrary L) {
     return L.first == nullptr;
 }
@@ -25,7 +24,7 @@ adrLagu createElmLagu(InfotypeLagu data) {
 }
 
 void insertArtis(ListLibrary &L, adrArtis P) {
-    if (isEmptyLibrary(L)) { // Menggunakan isEmpty
+    if (isEmptyLibrary(L)) { 
         L.first = P;
     } else {
         adrArtis Q = L.first;
@@ -89,7 +88,6 @@ void deleteArtis(ListLibrary &L, string namaArtis) {
     }
 
     if (P != nullptr) {
-        // 1. Hapus semua anak (lagu) terlebih dahulu
         adrLagu C = P->child;
         while (C != nullptr) {
             adrLagu hapus = C;
@@ -97,8 +95,7 @@ void deleteArtis(ListLibrary &L, string namaArtis) {
             delete hapus;
         }
 
-        // 2. Hapus Node Artis
-        if (Prec == nullptr) { // Hapus first
+        if (Prec == nullptr) {
             L.first = P->next;
         } else {
             Prec->next = P->next;
@@ -111,7 +108,7 @@ void deleteArtis(ListLibrary &L, string namaArtis) {
 }
 
 void showLibrary(ListLibrary L) {
-    if (isEmptyLibrary(L)) { // Menggunakan isEmpty
+    if (isEmptyLibrary(L)) { 
         cout << "Library Kosong." << endl;
         return;
     }
@@ -133,17 +130,12 @@ void showLibrary(ListLibrary L) {
     }
 }
 
-// ==========================================
-// IMPLEMENTASI DLL (PLAYLIST)
-// ==========================================
-
 void createPlaylist(ListPlaylist &PL) {
     PL.first = nullptr;
     PL.last = nullptr;
     PL.current = nullptr;
 }
 
-// [BARU] Implementasi isEmpty untuk DLL
 bool isEmptyPlaylist(ListPlaylist PL) {
     return PL.first == nullptr;
 }
@@ -154,10 +146,10 @@ void addToPlaylist(ListPlaylist &PL, adrLagu song) {
     P->next = nullptr;
     P->prev = nullptr;
 
-    if (isEmptyPlaylist(PL)) { // Menggunakan isEmpty
+    if (isEmptyPlaylist(PL)) {
         PL.first = P;
         PL.last = P;
-        PL.current = P; // Set lagu pertama sebagai current
+        PL.current = P; 
     } else {
         P->prev = PL.last;
         PL.last->next = P;
@@ -167,7 +159,7 @@ void addToPlaylist(ListPlaylist &PL, adrLagu song) {
 }
 
 void showPlaylist(ListPlaylist PL) {
-    if (isEmptyPlaylist(PL)) { // Menggunakan isEmpty
+    if (isEmptyPlaylist(PL)) { 
         cout << "\n(Playlist Kosong)" << endl;
         return;
     }
@@ -210,16 +202,11 @@ void playPrev(ListPlaylist &PL) {
     }
 }
 
-// ==========================================
-// IMPLEMENTASI QUEUE (ANTRIAN)
-// ==========================================
-
 void createQueue(QueueLagu &Q) {
     Q.head = nullptr;
     Q.tail = nullptr;
 }
 
-// [BARU] Implementasi isEmpty untuk Queue
 bool isEmptyQueue(QueueLagu Q) {
     return Q.head == nullptr;
 }
@@ -229,7 +216,7 @@ void enqueue(QueueLagu &Q, adrLagu song) {
     P->songPtr = song;
     P->next = nullptr;
 
-    if (isEmptyQueue(Q)) { // Menggunakan isEmpty
+    if (isEmptyQueue(Q)) { 
         Q.head = P;
         Q.tail = P;
     } else {
@@ -240,7 +227,7 @@ void enqueue(QueueLagu &Q, adrLagu song) {
 }
 
 void dequeue(QueueLagu &Q, adrLagu &song) {
-    if (isEmptyQueue(Q)) { // Menggunakan isEmpty
+    if (isEmptyQueue(Q)) { 
         song = nullptr;
     } else {
         adrQueue P = Q.head;
@@ -254,7 +241,7 @@ void dequeue(QueueLagu &Q, adrLagu &song) {
 }
 
 void showQueue(QueueLagu Q) {
-    if (isEmptyQueue(Q)) { // Menggunakan isEmpty
+    if (isEmptyQueue(Q)) { 
         cout << "\n(Antrian Up Next Kosong)" << endl;
         return;
     }
@@ -267,8 +254,6 @@ void showQueue(QueueLagu Q) {
     }
 }
 
-
-// Fungsi inisialisasi data dummy (Tanpa Graph)
 void initData(ListLibrary &L) {
     // 1. Buat Artis
     adrArtis A1 = createElmArtis({"A01", "Tulus"});
@@ -285,7 +270,7 @@ void initData(ListLibrary &L) {
 
 void menuAdmin(ListLibrary &L) {
     int pil = 1;
-    string inputTemp; // Variabel penampung sementara untuk input angka
+    string inputTemp; 
 
     while (pil != 0) {
         cout << "\n--- MENU ADMIN ---" << endl;
@@ -296,23 +281,20 @@ void menuAdmin(ListLibrary &L) {
         cout << "0. Kembali" << endl;
 
         cout << "Pilihan: ";
-        getline(cin, inputTemp); // Baca input sebagai string dulu
+        getline(cin, inputTemp); 
 
-        // Cek agar program tidak error jika user menekan enter tanpa angka
         if (inputTemp.empty()) {
             pil = -1;
         } else {
-            pil = stoi(inputTemp); // Konversi String ke Integer
+            pil = stoi(inputTemp); 
         }
 
         if (pil == 1) {
             InfotypeArtis data;
 
-            // ID Artis dibaca pakai getline (aman untuk spasi)
             cout << "ID Artis: ";
             getline(cin, data.idArtis);
 
-            // Nama Artis dibaca pakai getline (aman, tidak perlu ignore sebelumnya)
             cout << "Nama Artis: ";
             getline(cin, data.namaArtis);
 
@@ -321,7 +303,7 @@ void menuAdmin(ListLibrary &L) {
         } else if (pil == 2) {
             string namaArtis;
             cout << "Nama Artis Tujuan: ";
-            getline(cin, namaArtis); // Langsung getline
+            getline(cin, namaArtis);
 
             adrArtis P = searchArtis(L, namaArtis);
             if (P != NULL) {
@@ -337,8 +319,8 @@ void menuAdmin(ListLibrary &L) {
                 getline(cin, data.genre);
 
                 cout << "Tahun: ";
-                getline(cin, inputTemp); // Baca tahun sebagai string dulu
-                data.tahun = stoi(inputTemp); // Konversi ke integer
+                getline(cin, inputTemp); 
+                data.tahun = stoi(inputTemp); 
 
                 insertLagu(P, createElmLagu(data));
             } else {
@@ -349,7 +331,7 @@ void menuAdmin(ListLibrary &L) {
         } else if (pil == 4) {
             string nama;
             cout << "Nama Artis yang dihapus: ";
-            getline(cin, nama); // Langsung getline
+            getline(cin, nama);
 
             deleteArtis(L, nama);
         }
@@ -357,11 +339,11 @@ void menuAdmin(ListLibrary &L) {
 }
 
 void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
-    int pil = 1;      // Inisialisasi awal agar loop berjalan
-    string inputTemp; // Variabel bantuan untuk membaca input angka
+    int pil = 1;      
+    string inputTemp; 
 
     while (pil != 0) {
-        cout << "\n--- MENU USER (HARMONY HUB) ---" << endl;
+        cout << "\n--- MENU USER ---" << endl;
         cout << "1. Cari & Tambah ke Playlist" << endl;
         cout << "2. Lihat Playlist" << endl;
         cout << "3. Play Current Song" << endl;
@@ -372,20 +354,18 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         cout << "0. Kembali" << endl;
 
         cout << "Pilihan: ";
-        getline(cin, inputTemp); // Baca input menu sebagai string
+        getline(cin, inputTemp); 
 
-        // Konversi string ke integer
         if (inputTemp.empty()) {
             pil = -1;
         } else {
-            // Note: Bisa tambahkan try-catch jika ingin lebih aman dari input huruf
-            pil = stoi(inputTemp);
+=            pil = stoi(inputTemp);
         }
 
         if (pil == 1) {
             string judul;
             cout << "Cari Judul Lagu: ";
-            getline(cin, judul); // Langsung getline, buffer sudah bersih
+            getline(cin, judul);
 
             adrLagu P = searchLagu(L, judul);
             if (P != NULL) {
@@ -406,7 +386,6 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
                 adrLagu nextSong;
                 dequeue(Q, nextSong);
                 cout << "[QUEUE] Memutar antrian: " << nextSong->info.judul << endl;
-                // Disini bisa tambahkan logika update 'current' di playlist jika diperlukan
             } else {
                 playNext(PL);
             }
@@ -417,7 +396,7 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         } else if (pil == 6) {
             string judul;
             cout << "Judul Lagu: ";
-            getline(cin, judul); // Langsung getline
+            getline(cin, judul); 
 
             adrLagu P = searchLagu(L, judul);
             if (P != NULL) {
@@ -431,4 +410,3 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         }
     }
 }
-
