@@ -16,35 +16,28 @@ struct InfotypeArtis {
     string namaArtis;
 };
 
-// Pointer untuk MLL
 typedef struct ElmArtis *adrArtis;
 typedef struct ElmLagu *adrLagu;
 
-// Node Anak (Lagu) - Singly Linked List
 struct ElmLagu {
     InfotypeLagu info;
     adrLagu next;
 };
 
-// Node Induk (Artis) - Singly Linked List
 struct ElmArtis {
     InfotypeArtis info;
     adrArtis next;
-    adrLagu child; // Pointer ke list anak (Lagu)
+    adrLagu child; 
 };
 
 struct ListLibrary {
     adrArtis first;
 };
 
-// ==========================================
-// 2. STRUKTUR DATA PLAYLIST (DLL)
-// ==========================================
-
 typedef struct ElmPlaylist *adrPlaylist;
 
 struct ElmPlaylist {
-    adrLagu songPtr; // Pointer menunjuk ke data lagu asli di MLL (Hemat Memori)
+    adrLagu songPtr; 
     adrPlaylist next;
     adrPlaylist prev;
 };
@@ -52,17 +45,13 @@ struct ElmPlaylist {
 struct ListPlaylist {
     adrPlaylist first;
     adrPlaylist last;
-    adrPlaylist current; // Lagu yang sedang diputar
+    adrPlaylist current; 
 };
-
-// ==========================================
-// 3. STRUKTUR DATA QUEUE (ANTRIAN)
-// ==========================================
 
 typedef struct ElmQueue *adrQueue;
 
 struct ElmQueue {
-    adrLagu songPtr; // Pointer ke lagu di MLL
+    adrLagu songPtr; 
     adrQueue next;
 };
 
@@ -71,13 +60,8 @@ struct QueueLagu {
     adrQueue tail;
 };
 
-// ==========================================
-// PROTOTYPE FUNGSI
-// ==========================================
-
-// --- MLL (Library) ---
 void createLibrary(ListLibrary &L);
-bool isEmptyLibrary(ListLibrary L); // [BARU]
+bool isEmptyLibrary(ListLibrary L); 
 adrArtis createElmArtis(InfotypeArtis data);
 adrLagu createElmLagu(InfotypeLagu data);
 void insertArtis(ListLibrary &L, adrArtis P);
@@ -85,29 +69,27 @@ void insertLagu(adrArtis PArtis, adrLagu P);
 adrArtis searchArtis(ListLibrary L, string namaArtis);
 adrLagu searchLagu(ListLibrary L, string judulLagu);
 void deleteLagu(ListLibrary &L, string judulLagu);
-void deleteArtis(ListLibrary &L, string namaArtis); // Cascading Delete
+void deleteArtis(ListLibrary &L, string namaArtis); 
 void showLibrary(ListLibrary L);
 
-// --- DLL (Playlist) ---
 void createPlaylist(ListPlaylist &PL);
-bool isEmptyPlaylist(ListPlaylist PL); // [BARU]
+bool isEmptyPlaylist(ListPlaylist PL);
 void addToPlaylist(ListPlaylist &PL, adrLagu song);
 void showPlaylist(ListPlaylist PL);
 void playCurrent(ListPlaylist &PL);
 void playNext(ListPlaylist &PL);
 void playPrev(ListPlaylist &PL);
 
-// --- Queue (Antrian) ---
 void createQueue(QueueLagu &Q);
-bool isEmptyQueue(QueueLagu Q); // [BARU]
+bool isEmptyQueue(QueueLagu Q);
 void enqueue(QueueLagu &Q, adrLagu song);
-void dequeue(QueueLagu &Q, adrLagu &song); // Output song
+void dequeue(QueueLagu &Q, adrLagu &song); 
 void showQueue(QueueLagu Q);
 
-// --- Menu Helpers ---
-void initData(ListLibrary &L); // Graph dihapus dari parameter
+void initData(ListLibrary &L); 
 void menuAdmin(ListLibrary &L);
 void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q);
 
 
 #endif // TUBES_H_INCLUDED
+
