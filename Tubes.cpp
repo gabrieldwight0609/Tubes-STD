@@ -357,7 +357,7 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         if (inputTemp.empty()) {
             pil = -1;
         } else {
-=            pil = stoi(inputTemp);
+            pil = stoi(inputTemp);
         }
 
         if (pil == 1) {
@@ -407,4 +407,5 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         }
     }
 }
+
 
