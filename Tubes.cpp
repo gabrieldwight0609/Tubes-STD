@@ -92,7 +92,7 @@ void deleteArtis(ListLibrary &L, string namaArtis) {
         while (C != nullptr) {
             adrLagu hapus = C;
             C = C->next;
-            delete hapus;
+            hapus = nullptr;
         }
 
         if (Prec == nullptr) {
@@ -100,7 +100,7 @@ void deleteArtis(ListLibrary &L, string namaArtis) {
         } else {
             Prec->next = P->next;
         }
-        delete P;
+        P = nullptr;
         cout << "Artis '" << namaArtis << "' dan semua lagunya berhasil dihapus." << endl;
     } else {
         cout << "Artis tidak ditemukan." << endl;
@@ -236,7 +236,7 @@ void dequeue(QueueLagu &Q, adrLagu &song) {
         if (Q.head == nullptr) {
             Q.tail = nullptr;
         }
-        delete P;
+        P = nullptr;
     }
 }
 
@@ -255,13 +255,11 @@ void showQueue(QueueLagu Q) {
 }
 
 void initData(ListLibrary &L) {
-    // 1. Buat Artis
     adrArtis A1 = createElmArtis({"A01", "Tulus"});
     adrArtis A2 = createElmArtis({"A02", "Sheila On 7"});
     insertArtis(L, A1);
     insertArtis(L, A2);
 
-    // 2. Buat Lagu
     insertLagu(A1, createElmLagu({"L01", "Hati-Hati di Jalan", "Pop", 2022}));
     insertLagu(A1, createElmLagu({"L02", "Monokrom", "Pop", 2016}));
     insertLagu(A2, createElmLagu({"L03", "Dan", "Pop Rock", 1999}));
@@ -381,7 +379,6 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
             playCurrent(PL);
 
         } else if (pil == 4) {
-            // Cek Queue dulu
             if (!isEmptyQueue(Q)) {
                 adrLagu nextSong;
                 dequeue(Q, nextSong);
@@ -410,3 +407,4 @@ void menuUser(ListLibrary &L, ListPlaylist &PL, QueueLagu &Q) {
         }
     }
 }
+
