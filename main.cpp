@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Tubes.h"
+#include "Tubes.h""
 
 using namespace std;
 
@@ -7,15 +7,17 @@ int main() {
     ListLibrary Library;
     ListPlaylist Playlist;
     QueueLagu UpNext;
+    Graph RecommendationGraph;
 
     createLibrary(Library);
     createPlaylist(Playlist);
     createQueue(UpNext);
+    createGraph(RecommendationGraph);
 
-    initData(Library);
+    initData(Library, RecommendationGraph);
 
-    int role = 1;     
-    string inputTemp;  
+    int role = 1;
+    string inputTemp;
 
     while (role != 0) {
         cout << "\n=== SPOTIPI MUSIC PLAYER ===" << endl;
@@ -25,21 +27,20 @@ int main() {
         cout << "0. Keluar" << endl;
 
         cout << "Pilihan: ";
-        getline(cin, inputTemp); 
+        getline(cin, inputTemp);
 
         if (inputTemp.empty()) {
-            role = -1; 
+            role = -1;
         } else {
             role = stoi(inputTemp);
         }
 
         if (role == 1) {
-            menuAdmin(Library);
+            menuAdmin(Library, Playlist, UpNext, RecommendationGraph);
         } else if (role == 2) {
-            menuUser(Library, Playlist, UpNext);
+            menuUser(Library, Playlist, UpNext, RecommendationGraph);
         }
     }
 
     return 0;
 }
-
